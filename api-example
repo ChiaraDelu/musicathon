@@ -1,0 +1,201 @@
+{
+  "message": {
+    "body": {
+      "analysis": {
+        "entities": {
+          "entity_list": [
+            {
+              "categories": [
+                "Things",
+                "Geographical Locations",
+                "Natural Landmarks & Features"
+              ],
+              "entity_name": "Earth",
+              "matches": [
+                {
+                  "end_char": 69,
+                  "matched_text": "Earth",
+                  "start_char": 64
+                },
+                {
+                  "end_char": 570,
+                  "matched_text": "Earth",
+                  "start_char": 565
+                },
+                {
+                  "end_char": 1071,
+                  "matched_text": "Earth",
+                  "start_char": 1066
+                },
+                {
+                  "end_char": 1507,
+                  "matched_text": "Earth",
+                  "start_char": 1502
+                }
+              ],
+              "model_metadata": {
+                "description": "The third planet from the Sun in the Solar System.",
+                "type": "Natural Landmarks & Features"
+              },
+              "occurrences": 4,
+              "wikidata": {
+                "description": "third planet from the Sun in the Solar System",
+                "id": "Q2",
+                "rank": 527523,
+                "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/The_Blue_Marble_(5052124705).jpg/50px-The_Blue_Marble_(5052124705).jpg",
+                "types": [
+                  "terrestrial planet",
+                  "inner planet of the Solar System"
+                ]
+              },
+              "wikipedia": [
+                {
+                  "language": "en",
+                  "url": "https://en.wikipedia.org/wiki/Earth"
+                }
+              ]
+            }
+          ]
+        },
+        "language_detection": {
+          "languages": [
+            {
+              "is_romanized": false,
+              "language_iso_code_1": "en",
+              "language_iso_code_3": "eng",
+              "language_name": "english",
+              "percentage": 100
+            }
+          ]
+        },
+        "meaning": {
+          "description": "Generates a simple, short explanation of the lyrics' content.",
+          "explanation": "The song 'Hymn of the Big Wheel' by Massive Attack feat. Nellee Hooper reflects on the cyclical nature of life, where one person's struggles contrast with another's ease. Metaphors like the big wheel turning symbolize life's continuous motion, while references to nature changing colors and the power of reflections convey themes of transformation and introspection amidst societal challenges."
+        },
+        "moderation": {
+          "categories": [
+            {
+              "category": "harassment",
+              "is_present": false,
+              "score": 0.00068057960020849
+            },
+            {
+              "category": "hate",
+              "is_present": false,
+              "score": 0.000059766937110287
+            },
+            {
+              "category": "illicit",
+              "is_present": false,
+              "score": 0.000013342001090985
+            },
+            {
+              "category": "sexual",
+              "is_present": false,
+              "score": 0.00014550629385328
+            },
+            {
+              "category": "violence",
+              "is_present": false,
+              "score": 0.0161601690627
+            },
+            {
+              "category": "harassment/threatening",
+              "is_present": false,
+              "score": 0.000043055708132461
+            },
+            {
+              "category": "hate/threatening",
+              "is_present": false,
+              "score": 0.0000099152731159202
+            },
+            {
+              "category": "illicit/violent",
+              "is_present": false,
+              "score": 0.0000071419013998964
+            },
+            {
+              "category": "self-harm/intent",
+              "is_present": false,
+              "score": 0.00036267345270147
+            },
+            {
+              "category": "self-harm/instructions",
+              "is_present": false,
+              "score": 0.00023110109769851
+            },
+            {
+              "category": "self-harm",
+              "is_present": false,
+              "score": 0.0047112553843201
+            },
+            {
+              "category": "sexual/minors",
+              "is_present": false,
+              "score": 0.000023050672199314
+            },
+            {
+              "category": "violence/graphic",
+              "is_present": false,
+              "score": 0.0015815976938514
+            }
+          ],
+          "description": "Identifies a set of content categories that may require moderation.",
+          "needs_moderation": false
+        },
+        "moods": {
+          "description": "Extracts a list of an arbitrary number of moods from the lyrics corpus to establish a form of lyrics classification through sentiment analysis.",
+          "main_moods": [
+            "reflection",
+            "angst",
+            "social commentary",
+            "nature",
+            "empowerment"
+          ]
+        },
+        "rating": {
+          "audience": "PG",
+          "description": "Assigns to the provided song's lyrics a parental guide rating, much like the ones from the Motion Picture Association film rating system.",
+          "descriptor": "The lyrics contain themes of struggle and reflection on life and the environment, which may require parental guidance for younger children. There are no explicit themes, but some lines may be considered more suitable for older children."
+        },
+        "religion": {
+          "description": "Identifies references to religions, religious themes or religious groups within a song's lyrics.",
+          "has_references": false
+        },
+        "themes": {
+          "description": "Extracts a list of the main themes covered by the song's lyrics, referring to the portion of the songs that better convey such messages.",
+          "main_themes": [
+            {
+              "quotes": [
+                "An acid drop of rain, recycled from the sea",
+                "One man struggles while another relaxes",
+                "But the ghetto sun will nurture life and mend my soul sometime again"
+              ],
+              "theme": "struggle and resilience"
+            },
+            {
+              "quotes": [
+                "Look up at the blue skies beneath a new tree",
+                "The wheel keeps turning, the sky's rearranging",
+                "Sometime again, you'll turn green, and the sea turns red"
+              ],
+              "theme": "change and reflection"
+            },
+            {
+              "quotes": [
+                "Will you cry in the most in a lead-free zone?",
+                "And so the green come tumbling down",
+                "There's a hole in my soul like a cavity"
+              ],
+              "theme": "environmental awareness"
+            }
+          ]
+        }
+      }
+    },
+    "header": {
+      "execute_time": 0.0059211254119873,
+      "status_code": 200
+    }
+  }
+}
