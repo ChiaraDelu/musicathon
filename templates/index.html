@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyric Companion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>🎵 Lyric Companion</h1>
+    <p>Search for a song and listen to it while you read the lyrics, highlighted in sync.</p>
+
+    <form action="{{ url_for('read') }}" method="get" class="search-form">
+      <input type="text" name="artist" placeholder="Artist (e.g. Idina Menzel)" required>
+      <input type="text" name="title" placeholder="Title (e.g. Let It Go)" required>
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="voice-clone-box">
+      {% if has_cloned_voice %}
+        <p>✅ Lyrics will be read in your cloned voice.</p>
+        <form action="{{ url_for('reset_voice') }}" method="post">
+          <button type="submit">Use default voice instead</button>
+        </form>
+      {% else %}
+        <p>Want to hear the lyrics in your own voice?</p>
+        <a href="{{ url_for('record') }}"><button type="button">🎙️ Record &amp; clone my voice</button></a>
+      {% endif %}
+    </div>
+  </main>
+</body>
+</html>

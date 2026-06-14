@@ -1,12 +1,12 @@
 """
-Genera un subset didattico di parole inglesi organizzate per pattern
-fonologico/ortografico utile per esercizi DSA:
-  - lettere mute (silent letters)
-  - cluster consonantici (consonant clusters)
+Generates a didactic subset of English words organized by
+phonological/orthographic pattern, useful for DSA exercises:
+  - silent letters
+  - consonant clusters
 
-Uso:
+Usage:
   python3 pipeline/didactic_words.py
-  -> scrive pipeline/didactic_words.json
+  -> writes pipeline/didactic_words.json
 """
 
 from __future__ import annotations
@@ -15,8 +15,8 @@ import json
 import re
 from pathlib import Path
 
-# Lista di parole comuni inglesi (livello scuola primaria/secondaria),
-# scelta per coprire i pattern target senza termini troppo rari.
+# List of common English words (elementary/middle school level),
+# chosen to cover the target patterns without overly rare terms.
 COMMON_WORDS = [
     # silent k (kn-)
     "knight", "know", "knee", "knife", "knock", "knit", "knot", "knob",
@@ -51,7 +51,7 @@ COMMON_WORDS = [
 ]
 
 
-# Pattern per LETTERE MUTE: (categoria -> regex sulla forma scritta)
+# SILENT LETTER patterns: (category -> regex on the written form)
 SILENT_LETTER_PATTERNS = {
     "silent_k_kn": re.compile(r"^kn"),
     "silent_w_wr": re.compile(r"^wr"),
@@ -63,7 +63,7 @@ SILENT_LETTER_PATTERNS = {
     "silent_h_wh": re.compile(r"^wh|^gh|^h(?=our)"),
 }
 
-# Pattern per CLUSTER CONSONANTICI iniziali: (categoria -> regex)
+# Initial CONSONANT CLUSTER patterns: (category -> regex)
 CONSONANT_CLUSTER_PATTERNS = {
     "cluster_str": re.compile(r"^str"),
     "cluster_spl": re.compile(r"^spl"),
@@ -76,7 +76,7 @@ CONSONANT_CLUSTER_PATTERNS = {
 
 
 def classify_word(word: str) -> list[str]:
-    """Restituisce tutte le categorie (pattern) a cui appartiene una parola."""
+    """Returns all the categories (patterns) a word belongs to."""
     categories = []
     for name, pattern in SILENT_LETTER_PATTERNS.items():
         if pattern.search(word):
@@ -88,7 +88,7 @@ def classify_word(word: str) -> list[str]:
 
 
 def build_subset(words: list[str]) -> dict[str, list[str]]:
-    """Raggruppa le parole per categoria di pattern fonologico/ortografico."""
+    """Groups words by phonological/orthographic pattern category."""
     subset: dict[str, list[str]] = {}
     for word in words:
         for category in classify_word(word):
@@ -103,6 +103,6 @@ if __name__ == "__main__":
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
 
-    print(f"Subset didattico salvato in {output_path}\n")
+    print(f"Didactic subset saved to {output_path}\n")
     for category, words in result.items():
         print(f"{category}: {', '.join(words)}")

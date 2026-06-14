@@ -2,8 +2,5 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.streamlit/
 .DS_Store
-node_modules/
-output/*.mp3
-output/*.json
+static/audio/*.mp3

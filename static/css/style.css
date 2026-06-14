@@ -1,0 +1,296 @@
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/OpenDyslexic-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/OpenDyslexic-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/OpenDyslexic-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "OpenDyslexic", "Verdana", "Arial", sans-serif;
+  font-size: 1.15rem;
+  background: linear-gradient(160deg, #caf0f8 0%, #90e0ef 45%, #48cae4 100%);
+  color: #03363d;
+  margin: 0;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 2rem 2rem 2.5rem;
+  box-shadow: 0 12px 30px rgba(0, 119, 182, 0.18);
+}
+
+a {
+  color: #0096c7;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin-top: 0.5rem;
+  color: #023e8a;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Search form */
+.search-form {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-form input {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.9rem 1.1rem;
+  font-size: 1.15rem;
+  font-family: inherit;
+  border: 3px solid #90e0ef;
+  border-radius: 16px;
+  background: #f0fbff;
+  color: #03363d;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: #00b4d8;
+}
+
+/* Buttons (shared, bubbly turquoise style) */
+button,
+.search-form button {
+  padding: 0.9rem 1.6rem;
+  font-size: 1.15rem;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #00b4d8, #0096c7);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 150, 199, 0.35);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 150, 199, 0.45);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: #b8c4c9;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error {
+  color: #d00000;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Voice clone box */
+.voice-clone-box {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: #e0fbfc;
+  border: 3px dashed #48cae4;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/* Recording page */
+.record-box {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+#status {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0077b6;
+}
+
+/* Meaning box */
+.meaning-box {
+  background: #e0fbfc;
+  border-left: 6px solid #00b4d8;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+  border-radius: 14px;
+  font-size: 1.15rem;
+}
+
+/* Mood tags */
+.moods {
+  margin-bottom: 1rem;
+}
+
+.mood-tag {
+  display: inline-block;
+  background: #ade8f4;
+  color: #023e8a;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0.2rem;
+}
+
+/* DSA / reading level box */
+.dsa-level {
+  margin: 1.2rem 0;
+  padding: 1rem 1.2rem;
+  background: #f0fbff;
+  border: 3px solid #90e0ef;
+  border-radius: 16px;
+  font-size: 1.15rem;
+}
+
+.dsa-level summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #0077b6;
+  margin-top: 0.4rem;
+}
+
+.word-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 0;
+}
+
+.word-list li {
+  padding: 0.3rem 0;
+  font-size: 1.1rem;
+}
+
+.practice-word {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.practice-btn {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.95rem;
+  border-radius: 999px;
+}
+
+.practice-feedback {
+  font-weight: bold;
+  color: #0077b6;
+}
+
+.phonetic {
+  color: #0096c7;
+  font-style: italic;
+  margin-left: 0.4rem;
+}
+
+/* Lyrics text, big and optimized for DSA readability */
+.lyrics {
+  font-size: 2rem;
+  line-height: 2.6;
+  letter-spacing: 0.04em;
+  word-spacing: 0.35em;
+  margin: 1.8rem 0;
+  text-align: center;
+}
+
+.word {
+  padding: 0.05em 0.15em;
+  border-radius: 8px;
+  transition: background-color 0.1s ease, transform 0.1s ease;
+  display: inline-block;
+}
+
+.word.active {
+  background-color: #ffd60a;
+  transform: scale(1.08);
+}
+
+.difficult-sound {
+  color: #d00000;
+  font-weight: bold;
+}
+
+audio {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 12px;
+}
+
+.speed-control {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.speed-control label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #023e8a;
+}
+
+.speed-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.speed-btn {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background: #ade8f4;
+  color: #023e8a;
+  box-shadow: none;
+}
+
+.speed-btn.active {
+  background: linear-gradient(135deg, #00b4d8, #0096c7);
+  color: white;
+  box-shadow: 0 6px 14px rgba(0, 150, 199, 0.35);
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyric Companion - Voice Cloning</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('index') }}">&larr; Back</a>
+
+    <h1>🎙️ Record your voice</h1>
+    <p>
+      Record at least 30 seconds of clear speech. We'll use it to clone
+      your voice and read song lyrics out loud in your own voice.
+    </p>
+
+    <div class="record-box">
+      <button id="recordBtn" type="button">● Start recording</button>
+      <button id="stopBtn" type="button" disabled>■ Stop</button>
+      <p id="status"></p>
+      <audio id="preview" controls style="display: none;"></audio>
+      <button id="cloneBtn" type="button" disabled>Clone my voice</button>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/record.js') }}"></script>
+</body>
+</html>

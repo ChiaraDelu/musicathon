@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyric Companion - Reader</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('index') }}">&larr; New search</a>
+
+    {% if error %}
+      <p class="error">❌ {{ error }}</p>
+    {% elif data %}
+      <h1>{{ data.title }} — {{ data.artist }}</h1>
+
+      {% if data.meaning %}
+      <div class="meaning-box">
+        <strong>Meaning:</strong> {{ data.meaning }}
+      </div>
+      {% endif %}
+
+      {% if data.moods %}
+      <div class="moods">
+        {% for mood in data.moods %}
+          <span class="mood-tag">{{ mood }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="dsa-level">
+        Reading level: <strong>{{ data.dsa_level }}/5</strong>
+        {% if data.difficult_words %}
+          <details>
+            <summary>Hardest words in this song</summary>
+            <ul class="word-list">
+              {% for w in data.difficult_words %}
+                <li class="practice-word" data-word="{{ w }}">
+                  <strong>{{ w }}</strong>
+                  {% if data.pronunciations.get(w) %}
+                    <span class="phonetic">/{{ data.pronunciations[w] }}/</span>
+                  {% endif %}
+                  <button type="button" class="practice-btn">🎤 Try it</button>
+                  <span class="practice-feedback"></span>
+                </li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endif %}
+      </div>
+
+      <div id="lyrics" class="lyrics">
+        {% for w in data.words %}
+          <span class="word" data-start="{{ w.start }}" data-end="{{ w.end }}">{{ w.html }}</span>
+          {% for _ in range(w.breaks_after) %}<br>{% endfor %}
+        {% endfor %}
+      </div>
+
+      <audio id="player" controls src="{{ data.audio_url }}"></audio>
+
+      <div class="speed-control">
+        <label for="speed">Reading speed</label>
+        <div class="speed-buttons">
+          <button type="button" class="speed-btn" data-speed="0.5">🐢 Slow</button>
+          <button type="button" class="speed-btn" data-speed="0.75">🚶 Calm</button>
+          <button type="button" class="speed-btn active" data-speed="1">🏃 Normal</button>
+          <button type="button" class="speed-btn" data-speed="1.25">🐇 Fast</button>
+        </div>
+      </div>
+    {% endif %}
+  </main>
+
+  <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/speed.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/practice.js') }}"></script>
+</body>
+</html>

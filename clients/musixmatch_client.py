@@ -1,11 +1,11 @@
 """
-Client per Musixmatch API: recupera lyrics + analisi AI (meaning, moods, themes, entities).
+Musixmatch API client: fetches lyrics + AI analysis (meaning, moods, themes, entities).
 
 Setup:
   1. pip install requests python-dotenv
-  2. Crea un file .env nella root del progetto con:
-       MUSIXMATCH_API_KEY=la_tua_api_key
-  3. python musixmatch_client.py "Nome Artista" "Titolo Canzone"
+  2. Create a .env file in the project root with:
+       MUSIXMATCH_API_KEY=your_api_key
+  3. python musixmatch_client.py "Artist Name" "Song Title"
 """
 
 from __future__ import annotations
@@ -19,18 +19,18 @@ load_dotenv()
 API_KEY = os.environ.get("MUSIXMATCH_API_KEY")
 BASE_URL = "https://api.musixmatch.com/ws/1.1"
 
-# TODO: aggiornare con l'endpoint esatto della Musixmatch AI API (analysis: meaning/moods/themes/entities)
-# quando avrai accesso alla documentazione completa.
+# TODO: update with the exact Musixmatch AI API endpoint (analysis: meaning/moods/themes/entities)
+# once full documentation access is available.
 AI_ANALYSIS_ENDPOINT = f"{BASE_URL}/track.lyrics.ai.get"
 
 
 def _get(endpoint: str, params: dict) -> dict:
     if not API_KEY:
         raise RuntimeError(
-            "MUSIXMATCH_API_KEY non configurata.\n"
-            "Crea un file .env nella root del progetto con:\n"
-            "  MUSIXMATCH_API_KEY=la_tua_api_key\n"
-            "Ottieni la chiave da: https://developer.musixmatch.com/"
+            "MUSIXMATCH_API_KEY not configured.\n"
+            "Create a .env file in the project root with:\n"
+            "  MUSIXMATCH_API_KEY=your_api_key\n"
+            "Get your key from: https://developer.musixmatch.com/"
         )
 
     params["apikey"] = API_KEY
@@ -41,17 +41,17 @@ def _get(endpoint: str, params: dict) -> dict:
 
     if status_code == 401:
         raise RuntimeError(
-            "MUSIXMATCH_API_KEY non valida o scaduta.\n"
-            "Verifica il file .env e la chiave API da: https://developer.musixmatch.com/"
+            "MUSIXMATCH_API_KEY invalid or expired.\n"
+            "Check the .env file and the API key from: https://developer.musixmatch.com/"
         )
     elif status_code and status_code >= 400:
-        raise RuntimeError(f"Errore API Musixmatch (status {status_code}): {data}")
+        raise RuntimeError(f"Musixmatch API error (status {status_code}): {data}")
 
     return data
 
 
 def search_track(artist: str, title: str) -> dict | None:
-    """Cerca una traccia e restituisce track_id + metadata di base."""
+    """Searches for a track and returns track_id + basic metadata."""
     data = _get(f"{BASE_URL}/track.search", {
         "q_artist": artist,
         "q_track": title,
@@ -73,7 +73,7 @@ def search_track(artist: str, title: str) -> dict | None:
 
 
 def get_lyrics(track_id: int) -> str | None:
-    """Restituisce il testo della canzone."""
+    """Returns the song's lyrics."""
     data = _get(f"{BASE_URL}/track.lyrics.get", {"track_id": track_id})
     body = data["message"]["body"]
 
@@ -85,21 +85,21 @@ def get_lyrics(track_id: int) -> str | None:
 
 def get_ai_analysis(track_id: int) -> dict:
     """
-    Restituisce l'analisi AI dei lyrics: meaning, moods, themes, entities, rating.
-    Struttura attesa (vedi api-example): message.body.analysis.{meaning, moods, themes, entities, rating, ...}
+    Returns the AI analysis of the lyrics: meaning, moods, themes, entities, rating.
+    Expected structure (see api-example): message.body.analysis.{meaning, moods, themes, entities, rating, ...}
     """
     data = _get(AI_ANALYSIS_ENDPOINT, {"track_id": track_id})
     return data["message"]["body"]["analysis"]
 
 
 def extract_variables(artist: str, title: str) -> dict:
-    """Pipeline completa: cerca la traccia ed estrae tutte le variabili utili al progetto."""
+    """Full pipeline: searches for the track and extracts all variables useful for the project."""
     track = search_track(artist, title)
     if not track:
-        raise ValueError(f"Nessuna traccia trovata per {artist} - {title}")
+        raise ValueError(f"No track found for {artist} - {title}")
 
     if not track["has_lyrics"]:
-        raise ValueError(f"Nessun testo disponibile per {artist} - {title}")
+        raise ValueError(f"No lyrics available for {artist} - {title}")
 
     track_id = track["track_id"]
     lyrics = get_lyrics(track_id)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     import json
 
     if len(sys.argv) != 3:
-        print("Uso: python musixmatch_client.py <artista> <titolo>")
+        print("Usage: python musixmatch_client.py <artist> <title>")
         sys.exit(1)
 
     try:
@@ -130,5 +130,5 @@ if __name__ == "__main__":
         result = extract_variables(artist, title)
         print(json.dumps(result, indent=2, ensure_ascii=False))
     except RuntimeError as e:
-        print(f"❌ Errore: {e}", file=sys.stderr)
+        print(f"❌ Error: {e}", file=sys.stderr)
         sys.exit(1)
