@@ -1,6 +1,6 @@
 import streamlit as st
 import json
-from musixmatch_client import extract_variables
+from clients.musixmatch_client import extract_variables
 
 st.set_page_config(page_title="Musicathon", layout="wide")
 
